@@ -1,0 +1,13 @@
+@media (max-width: 1240px) {
+	.checklist-display .menu-wrap {
+		width: 300px;
+
+		.menu {
+			width: 300px;
+
+			&:first-child {
+				display: none;
+			}
+		}
+	}
+}

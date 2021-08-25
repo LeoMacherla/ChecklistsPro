@@ -1,0 +1,247 @@
+*,
+*:before,
+*:after {
+	font-family: 'Ubuntu', sans-serif;
+	user-select: none;
+}
+
+body {
+	background: var(--bg-1);
+	color: var(--text);
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.display {
+	height: calc(100vh - var(--titlebar-height));
+	width: 100vw;
+	display: none;
+
+	&.active-display {
+		display: flex;
+	}
+
+	.display-contents {
+		flex: 1;
+	}
+}
+
+::selection {
+	background: var(--text);
+	color: var(--bg-1);
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--primary);
+}
+
+a {
+	color: var(--text);
+	user-select: none;
+}
+
+input,
+select {
+	display: block;
+	padding: 1.25em 1em;
+	border-radius: var(--border-radius);
+	font-size: 1em;
+	background: var(--bg-2);
+	color: var(--text);
+}
+
+select {
+	appearance: none;
+	cursor: pointer;
+}
+
+.input-label {
+	position: relative;
+	display: block;
+	overflow: visible;
+	margin: 3em 0 2em 0;
+
+	input,
+	select {
+		padding: 1em;
+		font-size: 1em;
+		width: 100%;
+	}
+
+	&::after {
+		content: attr(data-placeholder);
+		position: absolute;
+		top: 15px;
+		left: 15px;
+		color: rgba(var(--text-rgb), 0.25);
+		transition-property: color, top, left;
+		transition-timing-function: ease;
+		transition-duration: var(--anim-duration);
+		cursor: text;
+	}
+
+	&.focused::after {
+		color: var(--text);
+		top: -30px;
+		left: 0;
+	}
+}
+
+.file-input {
+	input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	label {
+		display: inline-block;
+		min-width: 125px;
+		padding: 1.25em 1em;
+		font-size: 1em;
+		text-align: center;
+		cursor: pointer;
+
+		border-radius: var(--border-radius);
+		background: var(--bg-2);
+		opacity: 0.5;
+		color: var(--text);
+		transition: background ease var(--anim-duration),
+			opacity ease var(--anim-duration);
+
+		&:hover {
+			background: var(--primary);
+			opacity: 1;
+		}
+	}
+}
+
+button {
+	display: block;
+	min-width: 125px;
+	padding: 1.25em 1em;
+	font-size: 1em;
+	text-align: center;
+	cursor: pointer;
+
+	border-radius: var(--border-radius);
+	background: var(--bg-2);
+	opacity: 0.5;
+	color: var(--text);
+	transition: background ease var(--anim-duration),
+		opacity ease var(--anim-duration);
+
+	&:hover {
+		background: var(--primary);
+		opacity: 1;
+	}
+}
+
+.gradient-hover {
+	position: relative;
+	appearance: none;
+	display: block;
+	min-width: 125px;
+	padding: 1.25em 1em;
+	font-size: 1em;
+	cursor: pointer;
+	overflow: hidden;
+
+	color: var(--text);
+	transition: background ease var(--anim-duration),
+		opacity ease var(--anim-duration);
+
+	span {
+		position: relative;
+		pointer-events: none;
+	}
+
+	&::before {
+		--size: 0;
+
+		content: '';
+		position: absolute;
+		left: var(--x);
+		top: var(--y);
+		width: var(--size);
+		height: var(--size);
+		background: radial-gradient(
+			circle closest-side,
+			rgba(var(--text-rgb), 0.05),
+			transparent
+		);
+		transform: translate(-50%, -50%);
+		transition: width ease var(--anim-duration),
+			height ease var(--anim-duration);
+	}
+
+	&:hover::before {
+		--size: 400px;
+	}
+}
+
+#svg-checklist {
+	fill: var(--text);
+}
+
+.primary-text {
+	color: var(--primary);
+}
+
+.red-text {
+	color: var(--red);
+}
+
+.hidden {
+	display: none;
+}
+
+.icon-border {
+	fill: var(--text);
+}
+
+.fill-animation {
+	position: relative;
+	overflow: hidden;
+
+	&:after {
+		content: '';
+		background: var(--bg-4);
+		opacity: 0.4;
+		position: absolute;
+		border-radius: 500px;
+		z-index: -2;
+		display: block;
+		left: -50%;
+		right: -50%;
+		top: -150%;
+		bottom: -150%;
+		line-height: 8.34em;
+		transform: scale(0, 0);
+		transition: transform ease calc(var(--anim-duration) * 2);
+	}
+
+	&:hover::after {
+		transform: scale(1, 1);
+	}
+}
+
+.strikethrough {
+	position: relative;
+	opacity: 0.75;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 55%;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: var(--primary);
+	}
+}

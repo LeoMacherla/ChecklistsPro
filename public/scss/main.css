@@ -1,0 +1,1037 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  --primary: #3da1ff;
+  --red: #da3c3c;
+  --anim-duration: 0.3s;
+  --border-radius: 8px;
+  --titlebar-height: 35px;
+}
+
+html[data-theme='dark'] {
+  --bg: #000000;
+  --bg-1: #181818;
+  --bg-2: #202020;
+  --bg-3: #2c2c2c;
+  --bg-4: #383838;
+  --text: #ffffff;
+  --text-rgb: 255, 255, 255;
+  --bg-1-rgb: 24, 24, 24;
+}
+
+html[data-theme='light'] {
+  --bg: #ffffff;
+  --bg-1: #e8e8e8;
+  --bg-2: #dedede;
+  --bg-3: #d4d4d4;
+  --bg-4: #c7c7c7;
+  --text: #000000;
+  --text-rgb: 0, 0, 0;
+  --bg-1-rgb: 232, 232, 232;
+}
+
+*,
+*:before,
+*:after {
+  font-family: 'Ubuntu', sans-serif;
+  user-select: none;
+}
+
+body {
+  background: var(--bg-1);
+  color: var(--text);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.display {
+  height: calc(100vh - var(--titlebar-height));
+  width: 100vw;
+  display: none;
+}
+
+.display.active-display {
+  display: flex;
+}
+
+.display .display-contents {
+  flex: 1;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--bg-1);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
+a {
+  color: var(--text);
+  user-select: none;
+}
+
+input,
+select {
+  display: block;
+  padding: 1.25em 1em;
+  border-radius: var(--border-radius);
+  font-size: 1em;
+  background: var(--bg-2);
+  color: var(--text);
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.input-label {
+  position: relative;
+  display: block;
+  overflow: visible;
+  margin: 3em 0 2em 0;
+}
+
+.input-label input,
+.input-label select {
+  padding: 1em;
+  font-size: 1em;
+  width: 100%;
+}
+
+.input-label::after {
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: rgba(var(--text-rgb), 0.25);
+  transition-property: color, top, left;
+  transition-timing-function: ease;
+  transition-duration: var(--anim-duration);
+  cursor: text;
+}
+
+.input-label.focused::after {
+  color: var(--text);
+  top: -30px;
+  left: 0;
+}
+
+.file-input input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.file-input label {
+  display: inline-block;
+  min-width: 125px;
+  padding: 1.25em 1em;
+  font-size: 1em;
+  text-align: center;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  background: var(--bg-2);
+  opacity: 0.5;
+  color: var(--text);
+  transition: background ease var(--anim-duration), opacity ease var(--anim-duration);
+}
+
+.file-input label:hover {
+  background: var(--primary);
+  opacity: 1;
+}
+
+button {
+  display: block;
+  min-width: 125px;
+  padding: 1.25em 1em;
+  font-size: 1em;
+  text-align: center;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  background: var(--bg-2);
+  opacity: 0.5;
+  color: var(--text);
+  transition: background ease var(--anim-duration), opacity ease var(--anim-duration);
+}
+
+button:hover {
+  background: var(--primary);
+  opacity: 1;
+}
+
+.gradient-hover {
+  position: relative;
+  appearance: none;
+  display: block;
+  min-width: 125px;
+  padding: 1.25em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  overflow: hidden;
+  color: var(--text);
+  transition: background ease var(--anim-duration), opacity ease var(--anim-duration);
+}
+
+.gradient-hover span {
+  position: relative;
+  pointer-events: none;
+}
+
+.gradient-hover::before {
+  --size: 0;
+  content: '';
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(circle closest-side, rgba(var(--text-rgb), 0.05), transparent);
+  transform: translate(-50%, -50%);
+  transition: width ease var(--anim-duration), height ease var(--anim-duration);
+}
+
+.gradient-hover:hover::before {
+  --size: 400px;
+}
+
+#svg-checklist {
+  fill: var(--text);
+}
+
+.primary-text {
+  color: var(--primary);
+}
+
+.red-text {
+  color: var(--red);
+}
+
+.hidden {
+  display: none;
+}
+
+.icon-border {
+  fill: var(--text);
+}
+
+.fill-animation {
+  position: relative;
+  overflow: hidden;
+}
+
+.fill-animation:after {
+  content: '';
+  background: var(--bg-4);
+  opacity: 0.4;
+  position: absolute;
+  border-radius: 500px;
+  z-index: -2;
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: -150%;
+  bottom: -150%;
+  line-height: 8.34em;
+  transform: scale(0, 0);
+  transition: transform ease calc(var(--anim-duration) * 2);
+}
+
+.fill-animation:hover::after {
+  transform: scale(1, 1);
+}
+
+.strikethrough {
+  position: relative;
+  opacity: 0.75;
+}
+
+.strikethrough:after {
+  content: '';
+  position: absolute;
+  top: 55%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+}
+
+.titlebar {
+  display: flex;
+  width: 100vw;
+  height: var(--titlebar-height);
+  background: var(--bg-2);
+  overflow: hidden;
+}
+
+.titlebar .tabs {
+  display: flex;
+}
+
+.titlebar .tab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  padding: 10px 15px;
+  font-size: 0.85em;
+  background: transparent;
+  opacity: 0.5;
+  cursor: default;
+  transition: opacity ease var(--anim-duration), background ease var(--anim-duration);
+}
+
+.titlebar .tab.active {
+  opacity: 1;
+  background: var(--bg-3);
+}
+
+.titlebar .tab.hidden {
+  display: none;
+}
+
+.titlebar .tab svg {
+  width: 13px;
+  height: 13px;
+  fill: var(--text);
+}
+
+.titlebar .tab div.close-tab {
+  opacity: 0.35;
+  transition: opacity ease var(--anim-duration);
+  cursor: pointer;
+}
+
+.titlebar .tab div.close-tab svg {
+  width: 10px;
+  height: 10px;
+}
+
+.titlebar .tab div.close-tab:hover {
+  opacity: 0.75;
+}
+
+.titlebar .dragging {
+  flex: 1;
+  -webkit-app-region: drag;
+}
+
+.titlebar .controls {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.titlebar .controls .control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 45px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity ease var(--anim-duration), background ease var(--anim-duration);
+}
+
+.titlebar .controls .control:hover {
+  opacity: 1;
+  background: var(--bg-3);
+}
+
+.titlebar .controls .control svg {
+  width: 10px;
+  height: 10px;
+}
+
+.titlebar .controls .control.minimise {
+  fill: var(--text);
+}
+
+.titlebar .controls .control.maximise {
+  stroke: var(--text);
+}
+
+.titlebar .controls .control.close:hover {
+  background: var(--red);
+}
+
+.titlebar .controls .control.close svg {
+  fill: var(--text);
+  stroke: var(--text);
+}
+
+.menu-wrap {
+  background: transparent;
+  width: 300px;
+  height: 100vh;
+  box-shadow: 11px 4px 17px rgba(0, 0, 0, 0.25);
+}
+
+.menu-wrap .menu {
+  height: 100%;
+  width: 100%;
+}
+
+.notifications {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  max-width: 600px;
+  z-index: 1000;
+}
+
+.notifications ul {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.notifications ul .notification {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 1.25em;
+  line-height: 1.5;
+  border-radius: var(--border-radius);
+  background: rgba(var(--text-rgb), 0.05);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transform: translateX(110%);
+}
+
+.notifications ul .notification .notification-header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.notifications ul .notification .notification-header h1 {
+  font-size: 1.25em;
+}
+
+.notifications ul .notification .notification-header svg {
+  width: 35px;
+  height: 35px;
+  fill: var(--text);
+}
+
+.notification-full-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  display: none;
+  justify-items: center;
+  align-items: center;
+  background: rgba(var(--bg-1-rgb), 0.5);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+}
+
+.notification-full-wrap .notification-full {
+  padding: 3.5em;
+  background: var(--bg-3);
+  border-radius: var(--border-radius);
+  max-width: 80%;
+  min-width: 60%;
+  transform: scale(0);
+}
+
+.notification-full-wrap .notification-full h1 {
+  margin-bottom: 0.5em;
+}
+
+.notification-full-wrap .notification-full .notification-actions {
+  padding: 0;
+  display: flex;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.notification-full-wrap .notification-full .notification-actions button.primary {
+  background: var(--primary);
+  opacity: 1;
+}
+
+.notification-full-wrap .notification-full .notification-actions button.warning:hover {
+  background: var(--red);
+}
+
+.menu {
+  position: relative;
+  height: 100%;
+}
+
+.menu header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+  height: 300px;
+}
+
+.menu header svg {
+  width: 115px;
+}
+
+.menu nav a span {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0 2em;
+  transition: background ease var(--anim-duration);
+}
+
+.menu nav a span svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text);
+}
+
+.menu footer {
+  position: absolute;
+  bottom: 3em;
+  padding: 1.5em;
+  width: 100%;
+  font-size: 0.85em;
+  text-align: center;
+}
+
+.display-contents.index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  opacity: 0.4;
+}
+
+.display-contents.index svg {
+  fill: var(--text);
+}
+
+.display-contents.index ul {
+  text-align: center;
+}
+
+.display-contents.index ul li {
+  margin: 0.75em 0;
+}
+
+.browse-display {
+  flex-direction: column;
+  padding: 3em;
+  overflow: auto;
+}
+
+.browse-display.active-display {
+  display: flex;
+}
+
+.browse-display header {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+}
+
+.browse-display header .input-label {
+  width: 75%;
+  margin: 3em 0;
+}
+
+.browse-display header .filter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  padding: 0.25em;
+  background: var(--bg-2);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background ease var(--anim-duration);
+  z-index: 10;
+}
+
+.browse-display header .filter svg {
+  fill: var(--text);
+  width: 35px;
+  height: 35px;
+  pointer-events: none;
+}
+
+.browse-display header .filter.enabled {
+  background: var(--bg-3);
+}
+
+.browse-display header .filter.enabled .manufacturers {
+  height: fit-content;
+  overflow: visible;
+}
+
+.browse-display header .filter .manufacturers {
+  position: absolute;
+  top: 150%;
+  opacity: 0;
+  left: 0;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75em;
+}
+
+.browse-display header .filter .manufacturers .manufacturer {
+  padding: 0.75em;
+  min-width: 150px;
+  opacity: 0.75;
+  border-radius: var(--border-radius);
+  background: var(--bg-4);
+  cursor: pointer;
+  transition: transform ease var(--anim-duration);
+}
+
+.browse-display header .filter .manufacturers .manufacturer:hover, .browse-display header .filter .manufacturers .manufacturer.selected {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.browse-display .categories {
+  margin-top: 5em;
+  padding-left: 5em;
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+}
+
+.browse-display .categories .category h1 {
+  margin-bottom: 1em;
+}
+
+.browse-display .categories .category .checklists-list {
+  display: flex;
+  gap: 2.75em;
+  flex-wrap: wrap;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  gap: 1em;
+  cursor: default;
+  min-width: 300px;
+  min-height: 150px;
+  padding: 2em 4em 2.5em 2em;
+  border-radius: var(--border-radius);
+  background: var(--bg-3);
+  transition: transform ease var(--anim-duration);
+}
+
+.browse-display .categories .category .checklists-list .checklist-option h2 {
+  max-width: 200px;
+  white-space: pre-wrap;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option p {
+  opacity: 0.5;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option .options {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75em;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option .options div {
+  opacity: 0.15;
+  transition: opacity ease var(--anim-duration);
+}
+
+.browse-display .categories .category .checklists-list .checklist-option .options div svg {
+  width: 25px;
+  height: 25px;
+  fill: var(--text);
+  cursor: pointer;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option .options div:hover {
+  opacity: 1;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option .options div.delete-checklist:hover {
+  opacity: 1;
+}
+
+.browse-display .categories .category .checklists-list .checklist-option .options div.delete-checklist:hover svg {
+  fill: var(--red);
+}
+
+.browse-display .categories .category .checklists-list .checklist-option:hover {
+  transform: scale(0.95);
+}
+
+.browse-display .categories .category .checklist-option[data-background-image] {
+  background: transparent;
+}
+
+.browse-display .categories .category .checklist-option[data-background-image] img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  z-index: -1;
+  opacity: 0.35;
+}
+
+.checklist-display {
+  display: none;
+}
+
+.checklist-display.active-display {
+  display: flex;
+}
+
+.checklist-display .menu-wrap {
+  display: flex;
+  width: 600px;
+}
+
+.checklist-display .menu-wrap .menu {
+  display: flex;
+  flex-direction: column;
+  border-right: solid 1px rgba(var(--text-rgb), 0.1);
+  resize: horizontal;
+}
+
+.checklist-display .menu-wrap .menu header {
+  text-align: center;
+  border-bottom: solid 1px rgba(var(--text-rgb), 0.1);
+  height: min-content;
+  padding: 5em 0;
+}
+
+.checklist-display .menu-wrap .menu header h1 {
+  margin: 0 10px;
+  font-size: 1.5em;
+  white-space: pre-wrap;
+}
+
+.checklist-display .menu-wrap .menu header p {
+  opacity: 0.5;
+}
+
+.checklist-display .menu-wrap .categories-menu {
+  border-right: none;
+}
+
+.checklist-display .menu-wrap .procedures,
+.checklist-display .menu-wrap .categories {
+  height: 100%;
+  padding: 2em 0;
+  overflow: auto;
+}
+
+.checklist-display .menu-wrap .procedures div,
+.checklist-display .menu-wrap .categories div {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1em 2em;
+  cursor: pointer;
+  transition: background ease var(--anim-duration);
+}
+
+.checklist-display .menu-wrap .procedures div:hover, .checklist-display .menu-wrap .procedures div.active,
+.checklist-display .menu-wrap .categories div:hover,
+.checklist-display .menu-wrap .categories div.active {
+  background: var(--bg-2);
+}
+
+.checklist-display .menu-wrap .categories {
+  display: none;
+}
+
+.checklist-display .menu-wrap .categories.active-menu {
+  display: block;
+}
+
+.checklist-display .display-contents {
+  height: 100vh;
+  flex: 1;
+  padding: 5em;
+  overflow: auto;
+}
+
+.checklist-display .display-contents .procedure-wrap {
+  display: none;
+  height: 100%;
+  width: 100%;
+  padding: 5em;
+  overflow: auto;
+}
+
+.checklist-display .display-contents .procedure-wrap.active-procedure {
+  display: block;
+}
+
+.checklist-display .display-contents table {
+  border-collapse: collapse;
+  width: 100%;
+  display: none;
+}
+
+.checklist-display .display-contents table.active-checklist {
+  display: table;
+}
+
+.checklist-display .display-contents table tr {
+  cursor: pointer;
+  transition: opacity ease var(--anim-duration);
+  background: var(--bg-2);
+}
+
+.checklist-display .display-contents table tr:nth-child(odd) {
+  background: var(--bg-3);
+}
+
+.checklist-display .display-contents table tr.complete {
+  opacity: 0.35;
+}
+
+.checklist-display .display-contents table tr:nth-child(1) td:first-child {
+  border-top-left-radius: var(--border-radius);
+}
+
+.checklist-display .display-contents table tr:nth-child(1) td:last-child {
+  border-top-right-radius: var(--border-radius);
+}
+
+.checklist-display .display-contents table tr:last-child td:first-child {
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.checklist-display .display-contents table tr:last-child td:last-child {
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.checklist-display .display-contents table tr td {
+  padding: 1.5em 3em;
+}
+
+.checklist-display .display-contents table tr td:last-child {
+  text-align: right;
+}
+
+.flightplan-display svg {
+  width: 25px;
+  height: 25px;
+  fill: var(--text);
+  cursor: pointer;
+}
+
+.flightplan-display .flightplan-viewer {
+  display: none;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.flightplan-display .flightplan-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  height: 100%;
+  width: 100vw;
+}
+
+.flightplan-display .flightplan-loader .options {
+  display: flex;
+  gap: 2em;
+}
+
+.flightplan-display .flightplan-loader .options button,
+.flightplan-display .flightplan-loader .options label {
+  width: 200px;
+}
+
+.flightplan-display .flightplan-options {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 70px;
+  background: var(--bg-4);
+  user-select: none;
+}
+
+.flightplan-display .flightplan-options #flightplanName {
+  position: absolute;
+  left: 2em;
+  opacity: 0.5;
+}
+
+.flightplan-display .flightplan-options .flightplan-main-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.flightplan-display .flightplan-options .flightplan-main-options div {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flightplan-display .flightplan-options .flightplan-main-options div:first-child {
+  padding-right: 1em;
+  border-right: solid 1px rgba(var(--text-rgb), 0.5);
+}
+
+.flightplan-display .flightplan-options .flightplan-main-options #currentZoom {
+  margin: 0 1em;
+  font-weight: bold;
+}
+
+.flightplan-display .flightplan-options .flightplan-main-options #currentPage {
+  font-weight: bold;
+}
+
+.flightplan-display .flightplan-options .flightplan-secondary-options {
+  position: absolute;
+  right: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.flightplan-display .flightplan-canvas {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1em;
+  overflow: auto;
+  min-height: 100%;
+  padding: 2.5em 0 7.5em 0;
+}
+
+.flightplan-display .flightplan-canvas .page-control {
+  position: fixed;
+  top: 50%;
+  transform: translateY(50%);
+  z-index: 100;
+  --size: 45px;
+  width: var(--size);
+  height: var(--size);
+}
+
+.flightplan-display .flightplan-canvas .page-control svg {
+  width: var(--size);
+  height: var(--size);
+  fill: var(--text);
+  fill-opacity: 0;
+  stroke: var(--text);
+  transition-property: fill-opacity stroke;
+  transition-timing-function: ease;
+  transition-duration: var(--anim-duration);
+}
+
+.flightplan-display .flightplan-canvas .page-control:hover svg {
+  fill-opacity: 1;
+  stroke: var(--bg-1);
+}
+
+.flightplan-display .flightplan-canvas .page-control-left {
+  left: 3em;
+}
+
+.flightplan-display .flightplan-canvas .page-control-right {
+  right: 3em;
+}
+
+.download-options-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  display: none;
+  justify-items: center;
+  align-items: center;
+  background: rgba(var(--bg-1-rgb), 0.5);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+}
+
+.download-options-wrap .download-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1em;
+  max-width: 80%;
+  padding: 3.5em;
+  background: var(--bg-3);
+  border-radius: var(--border-radius);
+  transform: scale(0);
+}
+
+@media (max-width: 1240px) {
+  .checklist-display .menu-wrap {
+    width: 300px;
+  }
+  .checklist-display .menu-wrap .menu {
+    width: 300px;
+  }
+  .checklist-display .menu-wrap .menu:first-child {
+    display: none;
+  }
+}

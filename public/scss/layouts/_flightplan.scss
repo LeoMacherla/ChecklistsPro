@@ -1,0 +1,165 @@
+.flightplan-display {
+	svg {
+		width: 25px;
+		height: 25px;
+		fill: var(--text);
+		cursor: pointer;
+	}
+
+	.flightplan-viewer {
+		display: none;
+		// display: flex;
+		flex-direction: column;
+		width: 100vw;
+	}
+
+	.flightplan-loader {
+		display: flex;
+		// display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 3em;
+		height: 100%;
+		width: 100vw;
+
+		.options {
+			display: flex;
+			gap: 2em;
+
+			button,
+			label {
+				width: 200px;
+			}
+		}
+	}
+
+	.flightplan-options {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100vw;
+		min-height: 70px;
+		background: var(--bg-4);
+		user-select: none;
+
+		#flightplanName {
+			position: absolute;
+			left: 2em;
+			opacity: 0.5;
+		}
+
+		.flightplan-main-options {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 1em;
+
+			div {
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			div:first-child {
+				padding-right: 1em;
+				border-right: solid 1px rgba(var(--text-rgb), 0.5);
+			}
+
+			#currentZoom {
+				margin: 0 1em;
+				font-weight: bold;
+			}
+
+			#currentPage {
+				font-weight: bold;
+			}
+		}
+
+		.flightplan-secondary-options {
+			position: absolute;
+			right: 2em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 1.5em;
+		}
+	}
+
+	.flightplan-canvas {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 1em;
+		overflow: auto;
+		min-height: 100%;
+		padding: 2.5em 0 7.5em 0;
+
+		.page-control {
+			position: fixed;
+			top: 50%;
+			transform: translateY(50%);
+			z-index: 100;
+
+			--size: 45px;
+
+			width: var(--size);
+			height: var(--size);
+
+			svg {
+				width: var(--size);
+				height: var(--size);
+				fill: var(--text);
+				fill-opacity: 0;
+				stroke: var(--text);
+				transition-property: fill-opacity stroke;
+				transition-timing-function: ease;
+				transition-duration: var(--anim-duration);
+			}
+
+			&:hover svg {
+				fill-opacity: 1;
+				stroke: var(--bg-1);
+			}
+		}
+
+		.page-control-left {
+			left: 3em;
+		}
+
+		.page-control-right {
+			right: 3em;
+		}
+	}
+}
+
+.download-options-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 200;
+	// display: grid;
+	display: none;
+	justify-items: center;
+	align-items: center;
+
+	background: rgba(var(--bg-1-rgb), 0.5);
+	backdrop-filter: blur(5px);
+	opacity: 0;
+
+	.download-options {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 1em;
+		max-width: 80%;
+		padding: 3.5em;
+		background: var(--bg-3);
+		border-radius: var(--border-radius);
+		transform: scale(0);
+	}
+}

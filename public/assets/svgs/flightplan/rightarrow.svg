@@ -1,0 +1,15 @@
+<svg
+   id="svg-rightArrow"
+   viewBox="0 0 75 75">
+  <defs/>
+  <g>
+    <circle
+       style="fill:none;stroke:#ffffff;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       cx="37.5"
+       cy="37.5"
+       r="34.539474" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 31.368735,52.386106 44.569854,38.287797 29.88037,22.599969"/>
+  </g>
+</svg>

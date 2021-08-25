@@ -1,0 +1,26 @@
+{
+	"name": "checklistspro",
+	"version": "2.4.0",
+	"description": "ChecklistsPro by The ChecklistsPro Project",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"keywords": [
+		"Checklists",
+		"ChecklistsPro"
+	],
+	"author": "Leo Macherla",
+	"license": "ISC",
+	"devDependencies": {
+		"electron": "^13.1.8",
+		"electron-builder": "^22.11.7",
+		"electron-reload": "^2.0.0-alpha.1"
+	},
+	"dependencies": {
+		"@electron/remote": "^1.2.1",
+		"gsap": "^3.7.1",
+		"node-fetch": "^2.6.1",
+		"pdfjs-dist": "^2.9.359"
+	}
+}

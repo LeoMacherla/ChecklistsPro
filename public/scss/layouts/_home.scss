@@ -1,0 +1,64 @@
+.menu {
+	position: relative;
+	height: 100%;
+
+	header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1.5em;
+
+		height: 300px;
+
+		svg {
+			width: 115px;
+		}
+	}
+
+	nav {
+		a span {
+			display: flex;
+			align-items: center;
+			gap: 1em;
+			padding: 0 2em;
+			transition: background ease var(--anim-duration);
+
+			svg {
+				width: 18px;
+				height: 18px;
+				fill: var(--text);
+			}
+		}
+	}
+
+	footer {
+		position: absolute;
+		bottom: 3em;
+		padding: 1.5em;
+		width: 100%;
+		font-size: 0.85em;
+		text-align: center;
+	}
+}
+
+.display-contents.index {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2em;
+	opacity: 0.4;
+
+	svg {
+		fill: var(--text);
+	}
+
+	ul {
+		text-align: center;
+
+		li {
+			margin: 0.75em 0;
+		}
+	}
+}

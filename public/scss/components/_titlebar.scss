@@ -1,0 +1,106 @@
+.titlebar {
+	display: flex;
+	width: 100vw;
+	height: var(--titlebar-height);
+	background: var(--bg-2);
+	overflow: hidden;
+
+	.tabs {
+		display: flex;
+	}
+
+	.tab {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1em;
+		padding: 10px 15px;
+		font-size: 0.85em;
+		background: transparent;
+		opacity: 0.5;
+		cursor: default;
+		transition: opacity ease var(--anim-duration),
+			background ease var(--anim-duration);
+
+		&.active {
+			opacity: 1;
+			background: var(--bg-3);
+		}
+
+		&.hidden {
+			display: none;
+		}
+
+		svg {
+			width: 13px;
+			height: 13px;
+			fill: var(--text);
+		}
+
+		div.close-tab {
+			opacity: 0.35;
+			transition: opacity ease var(--anim-duration);
+			cursor: pointer;
+
+			svg {
+				width: 10px;
+				height: 10px;
+			}
+
+			&:hover {
+				opacity: 0.75;
+			}
+		}
+	}
+
+	.dragging {
+		flex: 1;
+		-webkit-app-region: drag;
+	}
+
+	.controls {
+		display: flex;
+		flex-direction: row-reverse;
+
+		.control {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			width: 45px;
+			opacity: 0.5;
+			cursor: pointer;
+			transition: opacity ease var(--anim-duration),
+				background ease var(--anim-duration);
+
+			&:hover {
+				opacity: 1;
+				background: var(--bg-3);
+			}
+
+			svg {
+				width: 10px;
+				height: 10px;
+			}
+
+			&.minimise {
+				fill: var(--text);
+			}
+
+			&.maximise {
+				stroke: var(--text);
+			}
+
+			&.close {
+				&:hover {
+					background: var(--red);
+				}
+
+				svg {
+					fill: var(--text);
+					stroke: var(--text);
+				}
+			}
+		}
+	}
+}

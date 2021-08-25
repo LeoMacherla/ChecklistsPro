@@ -1,0 +1,31 @@
+<svg
+   id="svg-filter"
+   viewBox="0 0 16 11">
+  <rect
+     class="filter-rect-1"
+     style="fill-opacity:1;stroke-width:446.025;paint-order:stroke fill markers"
+     width="11.992829"
+     height="0.98871911"
+     x="1.9928966"
+     y="2.0043159"
+     ry="0.49435955"
+     id="rect2" />
+  <rect
+     class="filter-rect-2"
+     style="fill-opacity:1;stroke-width:369.966;paint-order:stroke fill markers"
+     width="8.251358"
+     height="0.98871911"
+     x="3.9808195"
+     y="5.0121288"
+     ry="0.49435955"
+     id="rect4" />
+  <rect
+     class="filter-rect-3"
+     style="fill-opacity:1;stroke-width:257.625;paint-order:stroke fill markers"
+     width="4.0010633"
+     height="0.98871911"
+     x="5.990397"
+     y="7.9968538"
+     ry="0.49435955"
+     id="rect6" />
+</svg>

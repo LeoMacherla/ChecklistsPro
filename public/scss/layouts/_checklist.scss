@@ -1,0 +1,139 @@
+.checklist-display {
+	display: none;
+
+	&.active-display {
+		display: flex;
+	}
+
+	.menu-wrap {
+		display: flex;
+		width: 600px;
+
+		.menu {
+			display: flex;
+			flex-direction: column;
+			border-right: solid 1px rgba(var(--text-rgb), 0.1);
+			resize: horizontal;
+
+			header {
+				text-align: center;
+				border-bottom: solid 1px rgba(var(--text-rgb), 0.1);
+				height: min-content;
+				padding: 5em 0;
+
+				h1 {
+					margin: 0 10px;
+					font-size: 1.5em;
+					white-space: pre-wrap;
+				}
+
+				p {
+					opacity: 0.5;
+				}
+			}
+		}
+
+		.categories-menu {
+			border-right: none;
+		}
+
+		.procedures,
+		.categories {
+			height: 100%;
+			padding: 2em 0;
+			overflow: auto;
+
+			div {
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				padding: 1em 2em;
+				cursor: pointer;
+				transition: background ease var(--anim-duration);
+
+				&:hover,
+				&.active {
+					background: var(--bg-2);
+				}
+			}
+		}
+
+		.categories {
+			display: none;
+
+			&.active-menu {
+				display: block;
+			}
+		}
+	}
+	.display-contents {
+		height: 100vh;
+		flex: 1;
+		padding: 5em;
+		overflow: auto;
+
+		.procedure-wrap {
+			display: none;
+			height: 100%;
+			width: 100%;
+			padding: 5em;
+			overflow: auto;
+
+			&.active-procedure {
+				display: block;
+			}
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			display: none;
+
+			&.active-checklist {
+				display: table;
+			}
+
+			tr {
+				cursor: pointer;
+				transition: opacity ease var(--anim-duration);
+				background: var(--bg-2);
+
+				&:nth-child(odd) {
+					background: var(--bg-3);
+				}
+
+				&.complete {
+					opacity: 0.35;
+				}
+
+				&:nth-child(1) {
+					td:first-child {
+						border-top-left-radius: var(--border-radius);
+					}
+
+					td:last-child {
+						border-top-right-radius: var(--border-radius);
+					}
+				}
+
+				&:last-child {
+					td:first-child {
+						border-bottom-left-radius: var(--border-radius);
+					}
+
+					td:last-child {
+						border-bottom-right-radius: var(--border-radius);
+					}
+				}
+
+				td {
+					padding: 1.5em 3em;
+				}
+
+				td:last-child {
+					text-align: right;
+				}
+			}
+		}
+	}
+}

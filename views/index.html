@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../public/scss/main.css">
+
+  <!-- JavaScript -->
+  <script src="../public/js/script.js" defer></script>
+
+  <title>ChecklistsPro</title>
+</head>
+
+<body>
+
+  <!-- Titlebar -->
+  <div class="titlebar">
+    <div class="tabs">
+      <div class="tab home-tab active" data-tab-name="home" onclick="switchTab('home')">
+        <svg draggable="false">
+          <use href="#svg-home"></use>
+        </svg>
+      </div>
+      <div class="tab browse-tab hidden" data-tab-name="browse" onclick="switchTab('browse')">
+        <svg draggable="false">
+          <use href="#svg-browse"></use>
+        </svg>
+        <span class="title">Browse Checklists</span>
+        <div class="close-tab" onclick="closeTab('browse')">
+          <svg class="close-tab" draggable="false">
+            <use class="close-tab" href="#svg-close"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="tab create-tab hidden" data-tab-name="create" onclick="switchTab('create')">
+        <svg draggable="false">
+          <use href="#svg-create"></use>
+        </svg>
+        <span class="title">Create a Checklist</span>
+        <div class="close-tab" onclick="closeTab('create')">
+          <svg class="close-tab" draggable="false">
+            <use class="close-tab" href="#svg-close"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="tab flightplan-tab hidden" data-tab-name="flightplan" onclick="switchTab('flightplan')">
+        <svg draggable="false">
+          <use href="#svg-document"></use>
+        </svg>
+        <span class="title">Flight Plan</span>
+        <div class="close-tab" onclick="closeTab('flightplan')">
+          <svg class="close-tab" draggable="false">
+            <use class="close-tab" href="#svg-close"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="tab settings-tab hidden" data-tab-name="settings" onclick="switchTab('settings')">
+        <svg draggable="false">
+          <use href="#svg-settings"></use>
+        </svg>
+        <span class="title">Application Settings</span>
+        <div class="close-tab" onclick="closeTab('settings')">
+          <svg class="close-tab" draggable="false">
+            <use class="close-tab" href="#svg-close"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="dragging"> </div>
+    <div class="controls">
+      <div class="control close" onclick="quitApplication()">
+        <svg draggable="false">
+          <use href="#svg-close"></use>
+        </svg>
+      </div>
+      <div class="control maximise" onclick="maximiseApplication()">
+        <svg draggable="false">
+          <use href="#svg-maximise"></use>
+        </svg>
+      </div>
+      <div class="control minimise" onclick="minimiseApplication()">
+        <svg draggable="false">
+          <use href="#svg-minimise"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="notifications">
+    <ul></ul>
+  </div>
+
+  <!-- Notification Full -->
+  <div class="notification-full-wrap">
+    <div class="notification-full">
+      <h1></h1>
+      <p></p>
+      <div class="notification-actions">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="display home-display active-display">
+    <div class="menu-wrap">
+      <div class="menu">
+        <header>
+          <svg>
+            <use href="#svg-iconTransparentBackground"></use>
+          </svg>
+          <h2>Version 2.4.0</h2>
+        </header>
+        <nav>
+          <a href="#" class="gradient-hover" onclick="openTab('browse')">
+            <span>
+              <svg draggable="false">
+                <use href="#svg-browse"></use>
+              </svg>
+              Browse Checklists
+            </span>
+          </a>
+          <a href="#" class="gradient-hover" onclick="openTab('create')">
+            <span>
+              <svg draggable="false">
+                <use href="#svg-create"></use>
+              </svg>
+              Create a Checklist
+            </span>
+          </a>
+          <a href="#" class="gradient-hover" onclick="openTab('flightplan')">
+            <span>
+              <svg draggable="false">
+                <use href="#svg-document"></use>
+              </svg>
+              Flight Plan
+            </span>
+          </a>
+          <a href="#" class="gradient-hover" onclick="openTab('settings')">
+            <span>
+              <svg draggable="false">
+                <use href="#svg-settings"></use>
+              </svg>
+              Application Settings
+            </span>
+          </a>
+        </nav>
+        <footer>
+          Created with 💖 by <span class="primary-text">Leo Macherla</span>
+        </footer>
+      </div>
+    </div>
+    <div class="display-contents index">
+      <svg draggable="false">
+        <use href="#svg-atcTower"></use>
+      </svg>
+      <h1>Hey there, Captain!</h1>
+      <ul>
+        <li>Menu (on the left) - Look at</li>
+        <li>Menu Option - Choose</li>
+        <li>ChecklistsPro - Use</li>
+      </ul>
+    </div>
+  </div>
+  <div class="display browse-display">
+    <header>
+      <label class="input-label" data-placeholder="Search for a checklist">
+        <input type="text" id="input-checklistSearch" name="checklistSearch">
+      </label>
+      <div class="filter">
+
+        <svg class="filter-svg">
+          <use href="#svg-filter"></use>
+        </svg>
+        <ul class="manufacturers"> </ul>
+      </div>
+    </header>
+    <div class="categories"></div>
+  </div>
+
+  <div class="display create-display">
+    <h1>Create</h1>
+  </div>
+
+  <div class="display flightplan-display">
+    <div class="download-options-wrap">
+      <div class="download-options">
+        <h1>Download Flightplan</h1>
+        <label for="downloadDestination">Choose a format:</label>
+        <select name="downloadDestination" id="downloadDestination">
+        </select>
+        <button onclick="downloadFlightplan()">Download</button>
+      </div>
+    </div>
+
+    <div class="flightplan-loader">
+      <h2>Choose a Source</h2>
+      <div class="options">
+        <button onclick="getFile()">PDF File</button>
+        <button onclick="getSimBrief()">SimBrief</button>
+      </div>
+    </div>
+    <div class="flightplan-viewer">
+      <div class="flightplan-options">
+        <div id="flightplanName"></div>
+        <div class="flightplan-main-options">
+          <div class="flightplan-pagination"><span id="currentPage"></span> / <span id="totalPages"></span></div>
+          <div class="flightplan-zoom">
+            <svg onclick="changeZoom(false)">
+              <use href="#svg-minus"></use>
+            </svg>
+            <div id="currentZoom"></div>
+            <svg onclick="changeZoom(true)">
+              <use href="#svg-plus"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="flightplan-secondary-options">
+          <div class="option" onclick="downloadFlightplanOptions()">
+            <svg>
+              <use href="#svg-download"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="flightplan-canvas">
+        <div class="page-control page-control-left" onclick="changePage(false)">
+          <svg>
+            <use href="#svg-leftArrow"></use>
+          </svg>
+        </div>
+        <canvas id="flightplan"></canvas>
+        <div class="page-control page-control-right" onclick="changePage(true)">
+          <svg>
+            <use href="#svg-rightArrow"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="display settings-display">
+    <h1>Settings</h1>
+  </div>
+
+  <div class="display checklist-example-display">
+    <div class="menu-wrap">
+      <div class="menu">
+        <header>
+          <h1 id="checklistTitle"></h1>
+          <p id="checklistAuthor"></p>
+        </header>
+        <div class="procedures"> </div>
+      </div>
+      <!-- <div class="menu categories-menu">
+        <div class="categories"></div>
+      </div> -->
+    </div>
+    <div class="display-contents checklist-display-contents">
+    </div>
+  </div>
+
+
+  <!-- SVGs -->
+
+
+  <!-- Icon transparent background -->
+  <svg class="hidden">
+    <symbol id="svg-iconTransparentBackground" viewBox="0 0 116 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="icon-border" d="M116 0H26.8611V11.8667H116V0Z" />
+      <path class="icon-border" d="M116 77.1333H49.0007V89H116V77.1333Z" />
+      <path class="icon-border" d="M116 0H104.115V89H116V0Z" />
+      <path class="icon-border" d="M38.7463 0H26.8611V36.554H38.7463V0Z" />
+      <path d="M7.72537 43.2931H0V51.0065H7.72537V43.2931Z" fill="#3DA1FF" />
+      <path d="M43.0422 44.1831H12.1407V50.1165H43.0422V44.1831Z" fill="#3DA1FF" />
+      <path d="M7.72537 61.0931H0V68.8065H7.72537V61.0931Z" fill="#3DA1FF" />
+      <path d="M43.0422 61.9831H12.1407V67.9165H43.0422V61.9831Z" fill="#3DA1FF" />
+      <path d="M7.72537 78.8931H0V86.6065H7.72537V78.8931Z" fill="#3DA1FF" />
+      <path d="M43.0422 79.7831H12.1407V85.7165H43.0422V79.7831Z" fill="#3DA1FF" />
+    </symbol>
+  </svg>
+
+  <!-- Checklist Icon -->
+  <svg class="hidden">
+    <symbol id="svg-checklist" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.95215 0H0.459473V3.20548H3.95215V0Z" />
+      <path d="M19.919 0.369862H5.94824V2.83562H19.919V0.369862Z" />
+      <path d="M3.95215 7.39725H0.459473V10.6027H3.95215V7.39725Z" />
+      <path d="M19.919 7.76712H5.94824V10.2329H19.919V7.76712Z" />
+      <path d="M3.95215 14.7945H0.459473V18H3.95215V14.7945Z" />
+      <path d="M19.919 15.1644H5.94824V17.6301H19.919V15.1644Z" />
+    </symbol>
+  </svg>
+
+
+  <!-- Close -->
+  <svg class="hidden">
+    <symbol id="svg-close" viewBox="0 0 24 24">
+      <path
+        d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+    </symbol>
+  </svg>
+
+  <!-- Maximise -->
+  <svg class="hidden">
+    <symbol viewBox="0 0 60 60" id="svg-maximise" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:svg="http://www.w3.org/2000/svg">
+      <defs id="defs2" />
+      <g id="layer1">
+        <rect
+          style="fill:none;stroke-width:13.1267;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+          id="rect846" width="46.769234" height="46.769203" x="6.6153817" y="6.6153831" />
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Minimise -->
+  <svg class="hidden">
+    <symbol viewBox="0 0 60 60" id="svg-minimise" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:svg="http://www.w3.org/2000/svg">
+      <defs id="defs2" />
+      <rect style="stroke-width:512.248;paint-order:stroke fill markers" id="rect1181" width="57.260731"
+        height="8.3998823" x="1.375" y="26.001276" />
+    </symbol>
+  </svg>
+
+  <!-- Home -->
+  <svg class="hidden">
+    <symbol id="svg-home" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:svg="http://www.w3.org/2000/svg">
+      <defs id="defs8" />
+      <path
+        d="M 995.62144,474.20721 537.157,16.076683 a 35.53962,35.53962 0 0 0 -50.30976,0 L 28.3828,474.20721 c -13.356575,13.35657 -20.9253013,31.49925 -20.9253013,50.42107 0,39.29059 31.9444753,71.23506 71.2350663,71.23506 h 48.306275 v 326.90218 c 0,19.70094 15.91659,35.61753 35.61754,35.61753 H 440.76705 V 709.06032 h 124.66137 v 249.32273 h 295.95944 c 19.70095,0 35.61753,-15.91659 35.61753,-35.61753 V 595.86334 h 48.30628 c 18.92182,0 37.0645,-7.45742 50.42107,-20.9253 27.71486,-27.8262 27.71486,-72.90464 -0.1113,-100.73083 z"
+        id="path2" style="stroke-width:1.11305" />
+    </symbol>
+  </svg>
+
+  <!-- Browse -->
+  <svg class="hidden">
+    <symbol id="svg-browse" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3.18791 0H5.31318V18H3.18791V0ZM0 0H2.12527V18H0V0ZM6.37582 0H8.50109V18H6.37582V0ZM16.0054 17.792L9.39264 0.902L11.3872 0.21L18 17.1L16.0054 17.792Z" />
+    </symbol>
+  </svg>
+
+  <!-- Create -->
+  <svg class="hidden">
+    <symbol id="svg-create" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M1.8 3.6H0V18H14.4V16.2H1.8V3.6ZM18 0H3.6V14.4H18V0ZM15.3 8.1H11.7V11.7H9.9V8.1H6.3V6.3H9.9V2.7H11.7V6.3H15.3V8.1Z" />
+    </symbol>
+  </svg>
+
+  <!-- Document -->
+  <svg class="hidden">
+    <symbol id="svg-document" viewBox="0 0 16 16">
+      <g>
+        <path
+          d="M8 1v3.5A1.5 1.5 0 0 0 9.5 6H13v7.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 13.5v-11A1.5 1.5 0 0 1 4.5 1H8z" />
+        <path d="M9 1.25V4.5a.5.5 0 0 0 .5.5h3.25L9 1.25z" />
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Settings -->
+  <svg class="hidden">
+    <symbol id="svg-settings" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M9.9 2H18V4H9.9V2ZM0 4H6.3V6H8.1V0H6.3V2H0V4ZM6.3 14H18V16H6.3V14ZM15.3 8H18V10H15.3V8ZM13.5 12V6.012H11.7V8H0V10H11.7V12H13.5ZM4.5 18V12H2.7V14H0V16H2.7V18H4.5Z" />
+    </symbol>
+  </svg>
+
+  <!-- ATC Tower -->
+  <svg class="hidden">
+    <symbol id="svg-atcTower" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M116.73 35.0626C116.125 32.8447 114.669 30.956 112.68 29.808C110.691 28.66 108.33 28.3456 106.11 28.9334L75.51 37.1357L35.55 0L24.48 2.97446L48.42 44.3465L19.71 52.008L8.37 43.1748L0 45.4281L14.94 71.3871L110.52 45.7887C115.2 44.4367 117.9 39.6595 116.73 35.0626ZM171 71.8378L162 89.8648H117L108 71.8378L117 62.8242H135V44.7972H144V62.8242H162L171 71.8378ZM180 161.973V180H0V161.973H117V98.8783H162V161.973H180Z" />
+    </symbol>
+  </svg>
+
+  <!-- Upload Image -->
+  <svg class="hidden">
+    <symbol id="svg-uploadImage" viewBox="0 0 22 21">
+      <path
+        d="M17 11.995C16.7348 11.995 16.4804 12.1004 16.2929 12.2879C16.1054 12.4754 16 12.7298 16 12.995V13.375L14.52 11.895C13.9974 11.3766 13.2911 11.0856 12.555 11.0856C11.8189 11.0856 11.1126 11.3766 10.59 11.895L9.89 12.595L7.41 10.115C6.88012 9.61062 6.17657 9.3293 5.445 9.3293C4.71343 9.3293 4.00988 9.61062 3.48 10.115L2 11.595V5.99501C2 5.7298 2.10536 5.47544 2.29289 5.28791C2.48043 5.10037 2.73478 4.99501 3 4.99501H10C10.2652 4.99501 10.5196 4.88966 10.7071 4.70212C10.8946 4.51458 11 4.26023 11 3.99501C11 3.7298 10.8946 3.47544 10.7071 3.28791C10.5196 3.10037 10.2652 2.99501 10 2.99501H3C2.20435 2.99501 1.44129 3.31108 0.87868 3.87369C0.316071 4.4363 0 5.19936 0 5.99501V17.995C0 18.7907 0.316071 19.5537 0.87868 20.1163C1.44129 20.6789 2.20435 20.995 3 20.995H15C15.7956 20.995 16.5587 20.6789 17.1213 20.1163C17.6839 19.5537 18 18.7907 18 17.995V12.995C18 12.7298 17.8946 12.4754 17.7071 12.2879C17.5196 12.1004 17.2652 11.995 17 11.995ZM3 18.995C2.73478 18.995 2.48043 18.8897 2.29289 18.7021C2.10536 18.5146 2 18.2602 2 17.995V14.425L4.9 11.525C5.04691 11.385 5.24206 11.3069 5.445 11.3069C5.64794 11.3069 5.84309 11.385 5.99 11.525L9.16 14.695L13.46 18.995H3ZM16 17.995C15.9986 18.1864 15.9354 18.3723 15.82 18.525L11.31 13.995L12.01 13.295C12.0817 13.2218 12.1673 13.1637 12.2617 13.124C12.3561 13.0843 12.4576 13.0639 12.56 13.0639C12.6624 13.0639 12.7639 13.0843 12.8583 13.124C12.9527 13.1637 13.0383 13.2218 13.11 13.295L16 16.205V17.995ZM20.71 3.28501L17.71 0.285013C17.6149 0.193973 17.5028 0.122608 17.38 0.0750135C17.1365 -0.0250045 16.8635 -0.0250045 16.62 0.0750135C16.4972 0.122608 16.3851 0.193973 16.29 0.285013L13.29 3.28501C13.1017 3.47332 12.9959 3.72871 12.9959 3.99501C12.9959 4.26132 13.1017 4.51671 13.29 4.70501C13.4783 4.89332 13.7337 4.9991 14 4.9991C14.2663 4.9991 14.5217 4.89332 14.71 4.70501L16 3.40501V8.99501C16 9.26023 16.1054 9.51458 16.2929 9.70212C16.4804 9.88966 16.7348 9.99501 17 9.99501C17.2652 9.99501 17.5196 9.88966 17.7071 9.70212C17.8946 9.51458 18 9.26023 18 8.99501V3.40501L19.29 4.70501C19.383 4.79874 19.4936 4.87314 19.6154 4.9239C19.7373 4.97467 19.868 5.00081 20 5.00081C20.132 5.00081 20.2627 4.97467 20.3846 4.9239C20.5064 4.87314 20.617 4.79874 20.71 4.70501C20.8037 4.61205 20.8781 4.50145 20.9289 4.37959C20.9797 4.25773 21.0058 4.12703 21.0058 3.99501C21.0058 3.863 20.9797 3.7323 20.9289 3.61044C20.8781 3.48858 20.8037 3.37798 20.71 3.28501Z" />
+    </symbol>
+  </svg>
+
+  <svg class="hidden">
+    <symbol id="svg-filter" viewBox="0 0 16 11">
+      <rect class="filter-rect-1" style="fill-opacity:1;stroke-width:446.025;paint-order:stroke fill markers"
+        width="11.992829" height="0.98871911" x="1.9928966" y="2.0043159" ry="0.49435955" id="rect2" />
+      <rect class="filter-rect-2" style="fill-opacity:1;stroke-width:369.966;paint-order:stroke fill markers"
+        width="8.251358" height="0.98871911" x="3.9808195" y="5.0121288" ry="0.49435955" id="rect4" />
+      <rect class="filter-rect-3" style="fill-opacity:1;stroke-width:257.625;paint-order:stroke fill markers"
+        width="4.0010633" height="0.98871911" x="5.990397" y="7.9968538" ry="0.49435955" id="rect6" />
+    </symbol>
+  </svg>
+
+  <!-- Minus -->
+  <svg class="hidden">
+    <symbol id="svg-minus" viewBox="0 0 25 25">
+      <path
+        d="M3.71094 11.5723H21.2891C21.3965 11.5723 21.4844 11.6602 21.4844 11.7676V13.2324C21.4844 13.3398 21.3965 13.4277 21.2891 13.4277H3.71094C3.60352 13.4277 3.51562 13.3398 3.51562 13.2324V11.7676C3.51562 11.6602 3.60352 11.5723 3.71094 11.5723Z" />
+    </symbol>
+  </svg>
+
+  <!-- Plus -->
+  <svg class="hidden">
+    <symbol id="svg-plus" viewBox="0 0 25 25">
+      <path
+        d="M13.2324 3.71094H11.7676C11.6374 3.71094 11.5723 3.77604 11.5723 3.90625V21.0938C11.5723 21.224 11.6374 21.2891 11.7676 21.2891H13.2324C13.3626 21.2891 13.4277 21.224 13.4277 21.0938V3.90625C13.4277 3.77604 13.3626 3.71094 13.2324 3.71094Z" />
+      <path
+        d="M20.7031 11.5723H4.29688C4.16667 11.5723 4.10156 11.6374 4.10156 11.7676V13.2324C4.10156 13.3626 4.16667 13.4277 4.29688 13.4277H20.7031C20.8333 13.4277 20.8984 13.3626 20.8984 13.2324V11.7676C20.8984 11.6374 20.8333 11.5723 20.7031 11.5723Z" />
+    </symbol>
+  </svg>
+
+  <!-- Download -->
+  <svg class="hidden">
+    <symbol id="svg-download" viewBox="0 0 25 25">
+      <path
+        d="M10.5469 0H14.4531C15.1025 0 15.625 0.522461 15.625 1.17188V9.375H19.9072C20.7764 9.375 21.2109 10.4248 20.5957 11.04L13.1689 18.4717C12.8027 18.8379 12.2021 18.8379 11.8359 18.4717L4.39941 11.04C3.78418 10.4248 4.21875 9.375 5.08789 9.375H9.375V1.17188C9.375 0.522461 9.89746 0 10.5469 0ZM25 18.3594V23.8281C25 24.4775 24.4775 25 23.8281 25H1.17188C0.522461 25 0 24.4775 0 23.8281V18.3594C0 17.71 0.522461 17.1875 1.17188 17.1875H8.33496L10.7275 19.5801C11.709 20.5615 13.291 20.5615 14.2725 19.5801L16.665 17.1875H23.8281C24.4775 17.1875 25 17.71 25 18.3594ZM18.9453 22.6562C18.9453 22.1191 18.5059 21.6797 17.9688 21.6797C17.4316 21.6797 16.9922 22.1191 16.9922 22.6562C16.9922 23.1934 17.4316 23.6328 17.9688 23.6328C18.5059 23.6328 18.9453 23.1934 18.9453 22.6562ZM22.0703 22.6562C22.0703 22.1191 21.6309 21.6797 21.0938 21.6797C20.5566 21.6797 20.1172 22.1191 20.1172 22.6562C20.1172 23.1934 20.5566 23.6328 21.0938 23.6328C21.6309 23.6328 22.0703 23.1934 22.0703 22.6562Z" />
+    </symbol>
+  </svg>
+
+  <!-- Left Arrow -->
+  <svg class="hidden">
+    <symbol id="svg-leftArrow" viewBox="0 0 75 75">
+      <defs />
+      <g>
+        <circle
+          style="stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+          cx="37.5" cy="37.5" r="34.539474" />
+        <path
+          style="stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+          d="M 43.40149,22.599969 30.200371,36.698278 44.889855,52.386106" />
+      </g>
+    </symbol>
+  </svg>
+
+
+  <!-- Right Arrow -->
+  <svg class="hidden">
+    <symbol id="svg-rightArrow" viewBox="0 0 75 75">
+      <defs />
+      <g>
+        <circle
+          style="stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+          cx="37.5" cy="37.5" r="34.539474" />
+        <path
+          style="stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+          d="M 31.368735,52.386106 44.569854,38.287797 29.88037,22.599969" />
+      </g>
+    </symbol>
+  </svg>
+
+
+  <!-- Delete -->
+  <svg class="hidden">
+    <symbol id="svg-delete" viewBox="0 0 24 24">
+      <g>
+        <path
+          d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z" />
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Info -->
+  <svg class="hidden">
+    <symbol id="svg-info" viewBox="0 0 24 24">
+      <g>
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1zm-.5 5a1 1 0 1 0 0 2h.5a1 1 0 1 0 0-2h-.5zM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2z" />
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Error -->
+  <svg class="hidden">
+    <symbol id="svg-error" viewBox="0 0 24 24">
+      <path
+        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.493 2 11.953 2zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z" />
+    </symbol>
+  </svg>
+
+</body>
+
+</html>
