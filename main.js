@@ -10,6 +10,10 @@ require('@electron/remote/main').initialize()
 // Electron reload
 if (isDev) require('electron-reload')(__dirname)
 
+// Auto Update
+const autoUpdater = require('update-electron-app')
+autoUpdater()
+
 // Fetch API
 const fetch = require('node-fetch')
 
@@ -54,8 +58,10 @@ const createMain = () => {
 
 app.setAppUserModelId('ChecklistsPro')
 
+
 // Once the Electron application is initialised (when it is ready) the function createMain is called
 app.whenReady()
+  .then(checkForUpdates)
   .then(createMain)
   .then(console.log(`Starting ChecklistsPro ${app.getVersion()}...`))
 

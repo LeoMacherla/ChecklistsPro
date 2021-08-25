@@ -1,7 +1,7 @@
 const pdfjs = require('pdfjs-dist')
 pdfjs.GlobalWorkerOptions.workerSrc = '../node_modules/pdfjs-dist/build/pdf.worker.js'
 const { gsap } = require('gsap')
-const { notify } = require('./notify')
+const { notify, closeNotifyFull } = require('./notify')
 const { renameTab } = require('./tabs')
 const { ipcRenderer, shell } = require('electron')
 
@@ -135,9 +135,31 @@ ipcRenderer.on('pdf-file', (e, arg) => {
   document.querySelector('.flightplan-secondary-options').style.display = ' none'
 })
 
+// Get SimBrief Username
+const getSimBriefUsername = () => {
+  notifyFull({
+    title: 'SimBrief Credentials Required',
+    description: '',
+    actions: [
+      {
+        text: 'Cancel',
+        click: 'close'
+      },
+      {
+        text: 'Done',
+        click: getSimBrief,
+        primary: true
+      },
+    ]
+  })
+}
+
 // Get pdf data from SimBrief
 const getSimBrief = async () => {
-  const response = await fetch(`https://www.simbrief.com/api/xml.fetcher.php?username=${config.simbrief.username}&json=1`)
+  closeNotifyFull()
+  const username = document.getElementById('simbriefUsername').value
+
+  const response = await fetch(`https://www.simbrief.com/api/xml.fetcher.php?username=${username}&json=1`)
 
   const data = await response.json()
 
@@ -214,7 +236,7 @@ module.exports = {
   changePage,
   changeZoom,
   getFile,
-  getSimBrief,
+  getSimBriefUsername,
   downloadFlightplan,
   downloadFlightplanOptions,
   downloadFlightplanOptionsClose

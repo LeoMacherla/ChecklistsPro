@@ -4,9 +4,11 @@ const { createTab, openTab, switchTab, closeTab } = require('../public/js/functi
 const { loadChecklists, uploadImage, deleteChecklist } = require('../public/js/functions/checklists')
 const { showCategory, openProcedure } = require('../public/js/functions/openChecklist')
 const { quitApplication, minimiseApplication, maximiseApplication } = require('../public/js/functions/winctrl')
-const { notify } = require('../public/js/functions/notify')
+const { notify, notifyFull } = require('../public/js/functions/notify')
 const { filterToggle, filterChecklists } = require('../public/js/functions/filter')
-const { changePage, changeZoom, getFile, getSimBrief, downloadFlightplan, downloadFlightplanOptions, downloadFlightplanOptionsClose } = require('../public/js/functions/flightplan')
+const { changePage, changeZoom, getFile, getSimBriefUsername, downloadFlightplan, downloadFlightplanOptions, downloadFlightplanOptionsClose } = require('../public/js/functions/flightplan')
+
+document.getElementById('appVersion').innerText = `Version ${app.getVersion()}`
 
 // Console message if app is not packaged
 if (app.isPackaged) {

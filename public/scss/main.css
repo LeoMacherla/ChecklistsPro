@@ -470,6 +470,10 @@ button:hover {
   margin-bottom: 0.5em;
 }
 
+.notification-full-wrap .notification-full input {
+  margin-top: 1.5em;
+}
+
 .notification-full-wrap .notification-full .notification-actions {
   padding: 0;
   display: flex;
@@ -1022,6 +1026,11 @@ button:hover {
   background: var(--bg-3);
   border-radius: var(--border-radius);
   transform: scale(0);
+}
+
+.not-avail.active-display {
+  display: grid;
+  place-items: center;
 }
 
 @media (max-width: 1240px) {

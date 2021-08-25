@@ -1,10 +1,12 @@
 {
 	"name": "checklistspro",
-	"version": "2.4.0",
+	"version": "2.4.21",
 	"description": "ChecklistsPro by The ChecklistsPro Project",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron ."
+		"start": "electron .",
+		"publish": "electron-builder --win --publish always",
+		"build": "electron-builder build --win --publish never"
 	},
 	"keywords": [
 		"Checklists",
@@ -21,6 +23,30 @@
 		"@electron/remote": "^1.2.1",
 		"gsap": "^3.7.1",
 		"node-fetch": "^2.6.1",
-		"pdfjs-dist": "^2.9.359"
+		"pdfjs-dist": "^2.9.359",
+		"update-electron-app": "^2.0.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/LeoMacherla/ChecklistsPro.git"
+	},
+	"build": {
+		"productName": "ChecklistsPro",
+		"win": {
+			"target": "nsis",
+			"icon": "/public/assets/icons/icon.png",
+			"publisherName": "The ChecklistsPro Project"
+		},
+		"directories": {
+			"buildResources": "build"
+		},
+		"publish": [
+			{
+				"provider": "github",
+				"owner": "LeoMacherla",
+				"repo": "ChecklistsPro",
+				"token": "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"
+			}
+		]
 	}
 }
